@@ -1,4 +1,5 @@
-clear all
+clear all;
+close all;
 
 load fisheriris
 x = meas(:,3:4);
@@ -23,5 +24,6 @@ diameter = 2*d(end);
 h = rectangle('position',[ctr,diameter,diameter],...
    'curvature',[1 1]);
 h.LineStyle = ':';
+daspect([1 1 1])    %force the axis to be 1:1
 
 tabulate(species(n))
