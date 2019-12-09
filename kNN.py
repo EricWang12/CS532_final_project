@@ -13,8 +13,9 @@ Python Version 2.7.10
 
 from kNN import *
 from os import listdir
-#import numpy as np
+import numpy as np
 import math
+
 
 
 '''
@@ -29,7 +30,7 @@ def make_matrix(path):
     file_lst = listdir(path)
     m = len(file_lst)
     i = 0
-    train_matrix = zeros((m,1024), dtype = int)
+    train_matrix = np.zeros((m,1024), dtype = int)
     for trainFile in file_lst:
         #print('file name: ' + trainFile)
         trainVect = img2vector(trainFile,path)
@@ -47,7 +48,7 @@ post: the contents of the file are returned in a 1x1024 vector are returned
 def img2vector(file_name,path):
     file_name = path+file_name
     f = open(file_name, 'r')
-    vect = zeros((1,1024)) #store zeros in a 1X1024 vector.
+    vect = np.zeros((1,1024)) #store zeros in a 1X1024 vector.
     for i in range(32):
         line = f.readline()
         for j in range(32):
