@@ -1,12 +1,14 @@
-import numpy as np
-from os import listdir
-from sklearn.neighbors import KNeighborsClassifier as KNN
 import random
 import sys
-from sklearn.decomposition import PCA
 import time
+
+import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+
+from os import listdir
+from sklearn.neighbors import KNeighborsClassifier as KNN
+from sklearn.decomposition import PCA
+
 import draw_digits as game
 
 np.set_printoptions(threshold=sys.maxsize)
@@ -24,30 +26,6 @@ def img2vector(filename):
             returnVect[0, 32*i+j] = int(lineStr[j])
 
     return returnVect
-
-def img2vector1d(filename):
-    returnVect = np.zeros(1024)
-    fr = open(filename)
-    for i in range(32):
-        lineStr = fr.readline()
-        for j in range(32):
-            returnVect[32*i+j] = int(lineStr[j])
-    return returnVect
-
-def img2matrix(filename):
-    returnVect = np.zeros((32, 32))
-    fr = open(filename)
-    for i in range(32):
-        lineStr = fr.readline()
-        for j in range(32):
-            returnVect[i, j] = int(lineStr[j])
-    return returnVect
-
-def reduceDimension(dimension, trainingMat):
-    pca = PCA(dimension)  # project from 64 to 2 dimensions
-    trainingMat = pca.fit_transform(trainingMat)
-    return trainingMat
-
 def plotNumbers(trainingMat, hwLabels):
     
     plt.scatter(trainingMat[:, 0], trainingMat[:, 1],
@@ -72,10 +50,29 @@ def drawYourOwnDigits():
         myDigitMat[i,:] = img2vector('myDigits/%s' % (fileNameStr))
     return myDigitMat, classNumbers
 
+# def img2vector1d(filename):
+#     returnVect = np.zeros(1024)
+#     fr = open(filename)
+#     for i in range(32):
+#         lineStr = fr.readline()
+#         for j in range(32):
+#             returnVect[32*i+j] = int(lineStr[j])
+#     return returnVect
+
+# def img2matrix(filename):
+#     returnVect = np.zeros((32, 32))
+#     fr = open(filename)
+#     for i in range(32):
+#         lineStr = fr.readline()
+#         for j in range(32):
+#             returnVect[i, j] = int(lineStr[j])
+#     return returnVect
+
+
+
 def handwritingClassTest():
     
     hwLabels = []
-    
     trainingFileList = listdir('trainingDigits')
     random.shuffle(trainingFileList)
     testFileList = trainingFileList[0:200]
@@ -100,9 +97,9 @@ def handwritingClassTest():
 
         classNumbers.append(int(fileNameStr.split('_')[0]))
 
-        TestMat[i,:] = img2vector1d('trainingDigits/%s' % (fileNameStr))
+        TestMat[i,:] = img2vector('trainingDigits/%s' % (fileNameStr))
 
-    TestMat, classNumbers = drawYourOwnDigits()
+    #TestMat, classNumbers = drawYourOwnDigits()
     print(trainingMat.shape)
     print(TestMat.shape)
 

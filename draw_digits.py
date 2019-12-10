@@ -58,7 +58,7 @@ def Save(number, cells, cell_size, cells_wide, cells_high):
         chars[x] = '1' if cell.value != ' ' else '0'
         written_cells[y] = "".join(chars)
 
-    write_file = open("myDigits/"  + str(number) + "_digit.txt", 'w')
+    write_file = open("myDigits/"  + str(number) + "_digit.txt", 'w+')
     for row in range(len(written_cells)):
         write_file.write(written_cells[row])
         # if row == len(written_cells) - 1:
