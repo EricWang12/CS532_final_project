@@ -99,7 +99,7 @@ def handwritingClassTest():
 
         TestMat[i,:] = img2vector('trainingDigits/%s' % (fileNameStr))
 
-    #TestMat, classNumbers = drawYourOwnDigits()
+    TestMat, classNumbers = drawYourOwnDigits()
     print(trainingMat.shape)
     print(TestMat.shape)
 
